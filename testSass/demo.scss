@@ -1,0 +1,56 @@
+//function
+@function doubleHeight($height){
+  @return 2*$height;
+}
+.demoFunc {
+  height: doubleHeight(10)+px;
+}
+
+
+//if
+$hasValue:true;
+$hasValue2:true !default;
+$hasValue2:false;
+
+@if $hasValue {
+  .hasValue1 {
+    color: yellow;
+  }
+}
+
+@if $hasValue2 {
+  .hasValue2 {
+    color: yellow;
+  }
+}
+
+//for
+$gridColumns: 12 !default; 
+$gridcolumnWidth: 60px !default; 
+$gridGutter: 20px !default; 
+
+%span-base{ float:left; margin-left:$gridGutter / 2; margin-right:$gridGutter / 2; } 
+
+@for $i from 1 through $gridColumns { 
+  .span#{$i} { 
+    @extend %span-base; width:($gridcolumnWidth + $gridGutter) * $i - $gridGutter; 
+  } 
+} 
+
+//each
+@each $animal in puma, sea-slug, egret, salamander {
+  .#{$animal}-icon { 
+    background-image: url('/images/#{$animal}.png'); 
+  } 
+  
+}
+
+@each $animal, $color, $cursor in (puma, black, default),
+                                  (sea-slug, blue, pointer),
+                                  (egret, white, move) {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+    border: 2px solid $color;
+    cursor: $cursor;
+  }
+}

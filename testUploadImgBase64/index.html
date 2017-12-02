@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <input accept="image/*" name="upimage" id="upload_file" type="file">
+    <textarea id="base64_output" name="Word" style=" width:820px"></textarea>
+    <img src="" alt="" id='mypic'>
+    <script type="text/javascript">
+    let input = document.querySelector('#upload_file');
+    let output = document.querySelector('#base64_output');
+    let imgDisplay = document.querySelector('#mypic');
+    input.onchange = function() {
+        gen_base64();
+    };
+
+    function gen_base64() {
+        let file = input.files[0];
+        let currentFile = new FileReader(); //本地预览
+        currentFile.onload = function() {
+            output.value = currentFile.result;
+            imgDisplay.src = currentFile.result;
+        }
+        currentFile.readAsDataURL(file); //Base64
+    }
+    </script>
+</body>
+
+</html>
