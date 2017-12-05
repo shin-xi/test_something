@@ -4,12 +4,35 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <title>Image preview example</title>
+    <style>
+    #progress {
+        width: 1000px;
+        height: 10px;
+        background-color: grey;
+        position: relative;
+        z-index: 1;
+    }
+
+    .progress_refresh {
+        height: 10px;
+        position: absolute;
+        background-color: green;
+        z-index: 2;
+        left: 0;
+        top: 0;
+    }
+    </style>
     <script type="text/javascript">
     oFReader = new FileReader(), rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
     oFReader.onload = function(oFREvent) {
         document.getElementById("uploadPreview").src = oFREvent.target.result;
     };
+
+    oFReader.onprogress = function(oFREvent) {
+        console.log(oFREvent);
+        document.querySelector('.progress_refresh').setAttribute('style', `width:${(oFREvent.loaded/oFREvent.total)*1000}px`);
+    }
 
     function loadImageFile() {
         if (document.getElementById("uploadImage").files.length === 0) { return; }
@@ -36,6 +59,9 @@
             <input type="submit" value="Send" />
         </p>
     </form>
+    <p id="progress">
+        <span class="progress_refresh"></span>
+    </p>
 </body>
 
 </html>
