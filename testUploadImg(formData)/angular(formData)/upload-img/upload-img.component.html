@@ -1,0 +1,10 @@
+<!--<image-upload [max]="9"-->
+<!--[url]=""-->
+<!--[preview]="true"-->
+<!--[maxFileSize]="1024000">-->
+
+<!--</image-upload>-->
+
+<form [formGroup]="myForm">
+  <p><input type="file" formControlName="file" (change)="uploadFile($event)" multiple></p>
+</form>
