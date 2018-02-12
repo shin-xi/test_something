@@ -1,5 +1,5 @@
 function helloWorld(ready) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         if (ready) {
             resolve("Hello World!");
         } else {
@@ -8,14 +8,14 @@ function helloWorld(ready) {
     });
 }
 
-helloWorld(true).then(function (message) {
+helloWorld(true).then(function(message) {
     console.log(message);
-}, function (error) {
+}, function(error) {
     console.log(error);
 });
 
-helloWorld(false).then(function (message) {
+helloWorld(false).then(function(message) {
     console.log(message);
-}, function (error) {
+}, function(error) {
     console.log(error);
 });
